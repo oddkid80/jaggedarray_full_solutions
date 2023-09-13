@@ -43,8 +43,7 @@ def person():
             {f"and dateofbirth::date = '{dob}'" if dob else ""}
             {f"and (lower(stateabbreviation) = '{state.lower()}' or lower(statename) = '{state.lower()}')" if state else ""}
         limit 500
-        """     
-        engine = sqlalchemy.create_engine(connection_url)  
+        """      
         with engine.connect() as con:
             persons = pd.read_sql(query,con)             
     

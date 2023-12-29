@@ -2,7 +2,9 @@ use diesel::prelude::*;
 
 //Diesel person table
 diesel::table! {
+    //table name (primary key)
     person (id) {
+        //column -> diesel type
         id -> Bigint,
         firstname -> Nullable<Varchar>,
         lastname -> Nullable<Varchar>,

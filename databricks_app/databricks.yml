@@ -1,0 +1,39 @@
+bundle:
+  name: my-app
+
+#setting up variables to be used in other places
+variables:
+  app_name: 
+    description: "Name of the app"
+    default: "my-app"
+  sql_warehouse:
+    description: "SQL warehouse ID"
+    #this is the ID from the warehouse "overview" page - next to name
+    default: "your_warehouse_id"
+  bundle_path:
+    description: "Path to the bundle code"
+    #this is the path where the bundle and files will be stored
+    default: "/Workspace/Shared/${var.app_name}/${bundle.target}"
+
+
+resources:
+  apps:
+    app:
+      name: ${bundle.target}-${var.app_name}
+      #when deploying a bundle, the files themselves will be stored in /files
+      source_code_path: ${var.bundle_path}/files
+      description: "My Application"
+      resources:
+        - name: "sql-warehouse"
+          description: "SQL Warehouse for the application"
+          sql_warehouse:
+            id: ${var.sql_warehouse}
+            permission: "CAN_USE"
+
+targets:
+  prod:
+    mode: production
+    default: true
+    workspace:
+      host: https://your-workspace-host.databricks.com
+      root_path: ${var.bundle_path}

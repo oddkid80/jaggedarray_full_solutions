@@ -1,0 +1,13 @@
+#this is the command the app will run on launch
+#notice it's exactly the same as the `streamlit run app.py` above
+command:
+  - "streamlit"
+  - "run"
+  - "app.py"
+
+#environmental variables passed to the application
+env:
+  - name: "DATABRICKS_WAREHOUSE_ID"
+    valueFrom: "sql-warehouse"
+  - name: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+    value: "false"
